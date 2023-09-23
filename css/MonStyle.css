@@ -58,6 +58,7 @@ body {
 
 
 .logo {
+    position: relative;
     font-size: 2.5em;
     color: var(--text-color);
     font-weight: 600;
@@ -70,6 +71,10 @@ body {
     font-weight: 500;
     margin-left: 3.5rem;
     transition: .3s;
+}
+
+.navbar {
+    position: relative;
 }
 
 
@@ -124,6 +129,7 @@ section {
 
 .home-content {
     max-width: 60rem;
+    z-index: 99;
 }
 
 
@@ -141,10 +147,29 @@ section {
 
 
 .home-content .text-animate h3 {
-    font-size: 3.2rem;
+    font-size: 3.8rem;
     font-weight: 700;
     color: transparent;
     -webkit-text-stroke: .7px var(--main-color); /* Ajout le fond sur le titre h3*/
+    background-image: linear-gradient(var(--main-color), var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -33rem 0;
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+.home-content .text-animate h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid var(--main-color);
+    z-index: -1;
+    animation: homeCursorText 6s linear infinite;
+    animation-delay: 2s;
 }
 
 
@@ -315,7 +340,7 @@ section {
 }
 
 span {
-    color: var(--main-color);   
+    color: #ededed;   
 }
 
 .about-img {
@@ -340,13 +365,15 @@ span {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(0); /* Permet de faire des contour autour de la div */
-    width: 90%;
-    height: 102%;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 65%;
     border-top: .2rem solid var(--second-bg-color);
     border-bottom: .2rem solid var(--second-bg-color);
     border-left: .2rem solid var(--main-color);
     border-right: .2rem solid var(--main-color);
+    animation: aboutSpinner 8s linear infinite;
+
 }
 
 
@@ -629,6 +656,25 @@ input[type='number'] {
     color: var(--main-color);
 }
 
+/* ANIMATION RECHARGEMENT ET SCROLL */
+
+.animate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: yellowgreen;
+    z-index: 98;
+}
+
+.logo .animate, 
+.navbar .animate
+#menu-icon .animate {
+    animation: showRight 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+}
+
 
 /* BREAKPOINTS */
 @media (max-width: 1200px) {
@@ -703,7 +749,7 @@ input[type='number'] {
     .navbar a {
         display: block;
         font-size: 2rem;
-        margin: 3rem 0;
+        margin: 3rem 0 0 20rem;
         transform: translateX(-20rem);
         transition: .25s ease;
         transition-delay: 0s;
@@ -713,4 +759,134 @@ input[type='number'] {
         transform: translateX(0);
         transition-delay: .25s;
     }
+
+    .home-imhHover {
+        pointer-events: none;
+        background: var(--bg-color);
+        opacity: .6;
+    }
 }
+
+@media (max-width: 520px) {
+    html {
+        font-size: 50%;
+    }
+
+    .home-content h1 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-sci {
+        width: 160px;
+    }
+
+    .home-sci a {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+
+@media (max-width: 462px) {
+    .home-content h1 {
+        font-size: 5.2rem;
+    }
+
+    .education {
+        padding: 10rem 4% 5rem 5%;
+    }
+
+    .contact form .input-box .input-field {
+        width: 100%;
+    }
+
+    .contact form .btn-box.btns button {
+        margin-left: 3rem;
+    }
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer p {
+        margin-top: 2rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 371px) {
+    .home {
+        justify-content: center;
+    }
+
+    .home-content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content h1 {
+        font-size: 5rem;
+    }
+}
+
+
+/* KEYFRAMES ANIMATION  */
+@keyframes homeBgText {
+    0%,
+    10%,
+    100% {
+        background-position: -33rem 0;
+    }
+    65%,
+    85% {
+        background-position: 0 0;
+    }
+}
+
+@keyframes homeCursorText {
+    0%,
+    10%,
+    100% {
+        width: 0;
+    }
+    65%,
+    78%,
+    85% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    75%,
+    81% {
+        opacity: 0;
+    }
+}
+
+@keyframes aboutSpinner {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg); 
+    }
+}
+
+@keyframes showRight {
+    100% {
+        width: 0;
+    }
+}
+
+
+
+
+
+/*----------------------------
+@media (max-width: 268px) {  |
+    .home-sci {              |
+        margin-top: 1%;      |  NON FONCTIONEL
+    }                        |
+}                            |
+-----------------------------|
+*/ 
+
