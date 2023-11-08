@@ -19,7 +19,7 @@ navLinks.forEach(links => { // Pour chaque lien dans la barre de navigation
         let targetSection = document.getElementById(targetId); // Sélectionne la section cible par son ID
 
         window.scrollTo({ // Utilise la méthode scrollTo pour faire défiler la fenêtre
-            top: targetSection.offsetTop - 78, // Défile jusqu'au haut de la section avec un décalage de 70 pixels pour laisser un peu d'espace
+            top: targetSection.offsetTop - 80, // Défile jusqu'au haut de la section avec un décalage de 70 pixels pour laisser un peu d'espace
             behavior: 'smooth' // L'animation de défilement est fluide (smooth)
         });
 
@@ -52,7 +52,7 @@ window.onscroll = () => {
         }
     });
 
-    //en-tête collant
+    //En-tête collant
     let header = document.querySelector('header');
 
     header.classList.toggle('sticky', window.scrollY > 100);
@@ -60,4 +60,9 @@ window.onscroll = () => {
     // Supprimer l'icône de basculement et la barre de navigation lorsque l'on clique sur les liens de la barre de navigation (scroll)
     menuIcon.classList.remove('bx-x');
     navbar.classList.remove('active');
+
+    // Animation footer en scroll
+    let footer = document.querySelector('footer');
+
+    footer.classList.toggle('show-animate', this.innerHeight + this.scrollY >= document.scrollingElement.scrollHeight);
 }
